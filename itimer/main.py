@@ -2,13 +2,13 @@ import os
 import sys
 from PyQt5 import QtWidgets, QtGui
 from itimer.config import Config
-from itimer.gui import basewindow, configwindow
+from itimer.gui import basewindow, configwindow, widgets
+
 # ROOT = os.path.join(os.path.dirname(__file__))
 
 STYLE_PATH = "style/style.qss"
 CFG_PATH = "etc/cfg.json"
 CFG_ICON_PATH = "resource/icons/cfg.png"
-
 
 
 class Widget(QtWidgets.QMainWindow):
@@ -23,22 +23,26 @@ class Widget(QtWidgets.QMainWindow):
 
         self.stack = QtWidgets.QStackedLayout(self.Centr)
 
-
         self.base_widget = basewindow.Widget()
         self.cfg_widget = configwindow.Widget()
         self.stack.addWidget(self.base_widget)
         self.stack.addWidget(self.cfg_widget)
         self.stack.setCurrentIndex(0)
 
-        self.cfg_btn = QtWidgets.QPushButton(self.base_widget)
-        self.cfg_btn.clicked.connect(self.show_setings)
-        self.cfg_btn.setObjectName("cfg_btn")
-        self.cfg_btn.setStyleSheet("QPushButton { border: none; }")
-        self.cfg_btn.setIcon(QtGui.QIcon(CFG_ICON_PATH))
+        self.cfg_show_btn = widgets.Btn(self.base_widget,
+                                   "show_cfg_btn", CFG_ICON_PATH)
+        self.cfg_show_btn.clicked.connect(self.show_settings)
 
+        self.cfg_close_btn = widgets.Btn(self.cfg_widget,
+                                   "close_cfg_btn", CFG_ICON_PATH)
+        self.cfg_close_btn.clicked.connect(self.close_settings)
 
-    def show_setings(self):
+    def show_settings(self):
+        print(1)
         self.stack.setCurrentIndex(1)
+
+    def close_settings(self):
+        self.stack.setCurrentIndex(0)
 
     def closeEvent(self, event):
         pass
@@ -48,7 +52,7 @@ class Widget(QtWidgets.QMainWindow):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    # app.setStyleSheet(open("style/style.qss", "r").read())
+    app.setStyleSheet(open("style/style.qss", "r").read())
     main = Widget()
     main.show()
     sys.exit(app.exec_())

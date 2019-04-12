@@ -2,3 +2,7 @@
 QFrame {
     background: green
 }
+
+Btn {
+    border: none;
+}
