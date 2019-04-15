@@ -52,6 +52,7 @@ class Widget(QtWidgets.QMainWindow):
         self.cfg_close_btn.clicked.connect(self.close_settings)
 
         print(self.rect().right())
+
         print(self.start_timer_btn.rect().width())
 
     def start_timer(self):
