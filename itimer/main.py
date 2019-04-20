@@ -47,7 +47,7 @@ class Widget(QtWidgets.QMainWindow):
             self.rect().right() - self.start_timer_btn.rect().width(),
             self.rect().top())
 
-        self.cfg_close_btn = widgets.Btn(self.cfg_widget,
+        self.cfg_close_btn = widgets.Btn(self.cfg_widget.tool_widget,
                                          "close_cfg_btn", CFG_ICON_PATH)
         self.cfg_close_btn.clicked.connect(self.close_settings)
 
