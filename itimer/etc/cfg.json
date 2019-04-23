@@ -1,11 +1,1 @@
-{
-  "interval": 1,
-  "user_signal": "E:/Serg/programming/intervaltimer/timerinterval/sound.mp3",
-  "duration": 3,
-  "autostart": true,
-  "cycling": false,
-  "volume": 25,
-  "signal_1": "resource/sound/1.mp3",
-  "signal_2": "resource/sound/2.mp3",
-  "current_signal": "user_signal"
-}
+{"interval": 1, "user_signal": "E:/Serg/programming/intervaltimer/timerinterval/sound.mp3", "duration": 3, "autostart": true, "cycling": false, "volume": 25, "signal_1": "resource/sound/1.mp3", "signal_2": "resource/sound/2.mp3", "current_signal": "user_signal"}

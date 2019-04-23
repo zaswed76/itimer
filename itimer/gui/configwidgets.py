@@ -7,12 +7,16 @@ class OptionNameLabel(QtWidgets.QLabel):
     def __init__(self, *__args):
         super().__init__(*__args)
 
+class S(QtWidgets.QLabel):
+    def __init__(self, *__args):
+        super().__init__(*__args)
 
 class SignalSelectionWidget(QtWidgets.QFrame):
     def __init__(self, data=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.data = data
-        self.current_signal = ""
+        self.current_signal = self.data[self.data["current_signal"]]
+        self.label_name = os.path.basename(self.current_signal)
 
         self.setStyleSheet("background-color: white")
         self.hbox = QtWidgets.QHBoxLayout(self)
@@ -20,7 +24,7 @@ class SignalSelectionWidget(QtWidgets.QFrame):
         self.btn2 = QtWidgets.QPushButton("2")
         self.btn_choose_path = QtWidgets.QPushButton("+")
         self.btn_choose_path.clicked.connect(self.choose_path)
-        self.user_signal_lb = QtWidgets.QLabel("metallica.mp3")
+        self.user_signal_lb = QtWidgets.QLabel(self.label_name)
         self.lb = OptionNameLabel("сигнал")
         self.hbox.addWidget(self.lb)
         self.hbox.addWidget(self.btn1)
@@ -36,6 +40,7 @@ class SignalSelectionWidget(QtWidgets.QFrame):
             self.data["signal_path"] = fname
         else:
             pass
+
 
 class IntervalSelectionWidget(QtWidgets.QFrame):
     def __init__(self, data=None, *args, **kwargs):
@@ -67,12 +72,12 @@ class DurationSignalWidget(QtWidgets.QFrame):
         self.duration.setValue(self.data["duration"])
         self.duration.valueChanged.connect(self.value_changed)
 
-
         self.hbox.addWidget(self.lb)
         self.hbox.addWidget(self.duration)
 
     def value_changed(self, value):
         self.data["duration"] = value
+
 
 class AutostartWidget(QtWidgets.QFrame):
     def __init__(self, data=None, *args, **kwargs):
@@ -82,9 +87,9 @@ class AutostartWidget(QtWidgets.QFrame):
         self.lb = OptionNameLabel("автостарт")
         self.autostar = QtWidgets.QCheckBox()
 
-
         self.hbox.addWidget(self.lb)
         self.hbox.addWidget(self.autostar)
+
 
 class SelectingCyclingWidget(QtWidgets.QFrame):
     def __init__(self, data=None, *args, **kwargs):
@@ -94,9 +99,9 @@ class SelectingCyclingWidget(QtWidgets.QFrame):
         self.lb = OptionNameLabel("зациклить")
         self.cycling = QtWidgets.QCheckBox()
 
-
         self.hbox.addWidget(self.lb)
         self.hbox.addWidget(self.cycling)
+
 
 class VolumeWidget(QtWidgets.QFrame):
     def __init__(self, data=None, *args, **kwargs):
@@ -106,9 +111,9 @@ class VolumeWidget(QtWidgets.QFrame):
         self.lb = OptionNameLabel("громкость")
         self.volume = QtWidgets.QSlider(QtCore.Qt.Horizontal)
 
-
         self.hbox.addWidget(self.lb)
         self.hbox.addWidget(self.volume)
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
