@@ -14,6 +14,7 @@ CFG_ICON_PATH = "resource/icons/cfg.png"
 START_ICON_PATH = "resource/icons/start.png"
 
 
+
 class Widget(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
@@ -29,7 +30,8 @@ class Widget(QtWidgets.QMainWindow):
         self.stack = QtWidgets.QStackedLayout(self.Centr)
 
         self.base_widget = basewindow.Widget()
-        self.cfg_widget = configwindow.Widget()
+        self.cfg_widget = configwindow.ConfigWindow(data=self.data)
+
         self.stack.addWidget(self.base_widget)
         self.stack.addWidget(self.cfg_widget)
         self.stack.setCurrentIndex(0)
@@ -51,9 +53,6 @@ class Widget(QtWidgets.QMainWindow):
                                          "close_cfg_btn", CFG_ICON_PATH)
         self.cfg_close_btn.clicked.connect(self.close_settings)
 
-        print(self.rect().right())
-
-        print(self.start_timer_btn.rect().width())
 
     def start_timer(self):
         print("start")
@@ -63,6 +62,7 @@ class Widget(QtWidgets.QMainWindow):
         self.stack.setCurrentIndex(1)
 
     def close_settings(self):
+        print(self.data, "!!!!!!")
         self.stack.setCurrentIndex(0)
 
     def closeEvent(self, event):
